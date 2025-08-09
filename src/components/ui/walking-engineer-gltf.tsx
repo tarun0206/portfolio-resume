@@ -11,7 +11,7 @@ export function WalkingEngineerGLTF() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const mixerRef = useRef<THREE.AnimationMixer | null>(null);
   const modelRef = useRef<THREE.Object3D | null>(null);
-  const clock = useRef(new THREE.Clock());
+  // const clock = useRef(new THREE.Clock());
   const lastScrollRef = useRef(0);
 
   useEffect(() => {
@@ -48,9 +48,13 @@ export function WalkingEngineerGLTF() {
       model.position.set(0, 0, 0);
       // Turn the character 180 degrees around the vertical (Y) axis
       model.rotation.y = Math.PI;
-      model.traverse((o: any) => {
-        if (o.isMesh) o.castShadow = o.receiveShadow = true;
-      });
+        model.traverse((obj: THREE.Object3D) => {
+          const maybeMesh = obj as THREE.Mesh;
+          if ((maybeMesh as unknown as { isMesh?: boolean }).isMesh) {
+            maybeMesh.castShadow = true;
+            maybeMesh.receiveShadow = true;
+          }
+        });
       scene.add(model);
       modelRef.current = model;
 
