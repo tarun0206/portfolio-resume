@@ -3,6 +3,8 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import type { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
+import type { AnimationClip } from "three";
 
 // GLTF engineer model with walk animation; steps only when user scrolls.
 export function WalkingEngineerGLTF() {
@@ -40,7 +42,7 @@ export function WalkingEngineerGLTF() {
     const engineerUrl = "https://threejs.org/examples/models/gltf/Soldier.glb";
     const lazyLoad = () => {
       const loader = new GLTFLoader();
-      loader.load(engineerUrl, (gltf: any) => {
+      loader.load(engineerUrl, (gltf: GLTF) => {
       const model = gltf.scene;
       model.scale.set(1.2, 1.2, 1.2);
       model.position.set(0, 0, 0);
@@ -55,7 +57,7 @@ export function WalkingEngineerGLTF() {
       const mixer = new THREE.AnimationMixer(model);
       mixerRef.current = mixer;
       // Try to find a walking clip, otherwise play first
-        const clip = gltf.animations.find((a: any) => a.name.toLowerCase().includes("walk")) || gltf.animations[0];
+        const clip = gltf.animations.find((a: AnimationClip) => a.name.toLowerCase().includes("walk")) || gltf.animations[0];
         if (clip) {
           const action = mixer.clipAction(clip);
           action.play();
@@ -81,7 +83,6 @@ export function WalkingEngineerGLTF() {
       const sy = window.scrollY;
       const deltaScroll = sy - lastScrollRef.current;
       lastScrollRef.current = sy;
-      const dt = clock.current.getDelta();
 
       // Advance mixer time proportionally to scroll delta (only moves when scrolling)
       if (mixerRef.current) {

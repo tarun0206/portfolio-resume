@@ -1,9 +1,9 @@
 import { Header } from "@/components/Header";
-import { Hero } from "@/components/Hero";
+// import { Hero } from "@/components/Hero";
 import { Skills } from "@/components/Skills";
-import { Experience } from "@/components/Experience";
+// import { Experience } from "@/components/Experience";
 import { Education } from "@/components/Education";
-import { Contact } from "@/components/Contact";
+// import { Contact } from "@/components/Contact";
 import { AdalineHero } from "@/components/AdalineHero";
 import { Marquee } from "@/components/Marquee";
 import { Metrics } from "@/components/Metrics";
