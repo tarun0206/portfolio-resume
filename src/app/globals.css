@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Minimal styles for the horizon hero */
+.hero-container {
+  position: relative;
+  width: 100%;
+  height: 120vh;
+  overflow: hidden;
+}
+
+.hero-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+}
+
+.side-menu {
+  position: fixed;
+  top: 24px;
+  left: 24px;
+  z-index: 20;
+  color: var(--foreground);
+}
+.menu-icon { display: flex; flex-direction: column; gap: 4px; }
+.menu-icon span { width: 24px; height: 2px; background: currentColor; display: block; }
+.vertical-text { writing-mode: vertical-rl; margin-top: 8px; letter-spacing: 0.25em; font-size: 10px; opacity: 0.8; }
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.hero-title { font-size: clamp(48px, 8vw, 120px); font-weight: 800; letter-spacing: 0.04em; }
+.hero-subtitle { margin-top: 12px; font-size: clamp(16px, 2.2vw, 22px); opacity: 0.85; }
+.subtitle-line { display: block; }
+
+.scroll-progress {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(640px, 90vw);
+  z-index: 20;
+}
+.scroll-text { font-size: 12px; opacity: 0.7; margin-bottom: 6px; text-align: center; letter-spacing: 0.25em; }
+.progress-track { height: 3px; background: rgba(255,255,255,0.15); border-radius: 999px; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, #a855f7, #06b6d4); }
+.section-counter { margin-top: 6px; font-size: 12px; opacity: 0.7; text-align: center; }
+
+.scroll-sections { position: relative; z-index: 5; }
+.content-section { height: 120vh; display: grid; place-items: center; text-align: center; }
+
+/* Display font usage for big headings */
+.display {
+  font-family: var(--font-display), system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+/* Subtle animated noise overlay */
+.noise-overlay {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: -5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.6' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  animation: noiseMove 1.5s steps(4) infinite;
+}
+@keyframes noiseMove {
+  0% { transform: translate(0,0); }
+  25% { transform: translate(-2%,1%); }
+  50% { transform: translate(1%,-2%); }
+  75% { transform: translate(2%,1%); }
+  100% { transform: translate(0,0); }
+}
