@@ -21,8 +21,9 @@ export const contact = {
   title: "Senior Full Stack Developer",
   email: "tarun.singh.0206@gmail.com",
   phone: "+919354254337",
-  location: "India",
+  location: "New Delhi, India",
   linkedin: "https://www.linkedin.com/in/tarunsingh0206",
+  github: "https://github.com/tarun0206",
 };
 
 export const summary =
@@ -97,7 +98,7 @@ export const education: EducationItem[] = [
     degree: "B.Tech. in Electronics and Communication Engineering",
     location: "Delhi, India",
     year: "2023",
-    score: "8.24 GPA",
+    score: "8.34 GPA/10",
     notes: ["Captain of the basketball team"],
   },
   {
